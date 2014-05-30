@@ -1596,7 +1596,7 @@ class TOC(UserList.UserList):
     def append(self, tpl):
         try:
             fn = tpl[0]
-            if tpl[2] == "BINARY":
+            if tpl[2] in ["BINARY", "DATA"]:
                 # Normalize the case for binary files only (to avoid duplicates
                 # for different cases under Windows). We can't do that for
                 # Python files because the import semantic (even at runtime)
@@ -1611,7 +1611,7 @@ class TOC(UserList.UserList):
 
     def insert(self, pos, tpl):
         fn = tpl[0]
-        if tpl[2] == "BINARY":
+        if tpl[2] in ["BINARY","DATA"]:
             fn = os.path.normcase(fn)
         if not self.fltr.get(fn):
             self.data.insert(pos, tpl)
